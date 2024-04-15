@@ -1,0 +1,4 @@
+FROM iad.ocir.io/id204we8d65n/openjdk8-alpine:1.0
+COPY ./src/main/java/org/example/HelloWorld.class /app/org/example/HelloWorld.class
+WORKDIR /app
+ENTRYPOINT ["java", "org.example.HelloWorld"]

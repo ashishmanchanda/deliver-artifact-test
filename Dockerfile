@@ -1,16 +1,11 @@
 FROM openjdk:8-alpine
 
+## check wget command
 RUN wget https://github.com/dlcbld/deliver-artifact-test/blob/build-deliver-trigger-test/build_spec_ocir.yml
 
+## check curl from docker
+RUN apk --no-cache add curl
 RUN curl -vv -I https://about.gitlab.com/
-
-## Install python3
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-RUN python3 --version
-
-## Run PIP command
-RUN python3 -m pip install --user --upgrade pip
-RUN python3 -m pip install --user virtualenv
 
 COPY ./src/main/java/org/example/HelloWorld.class /app/org/example/HelloWorld.class
 WORKDIR /app
