@@ -1,4 +1,10 @@
-FROM iad.ocir.io/id204we8d65n/openjdk8-alpine:1.0
-COPY ./src/main/java/org/example/HelloWorld.class /app/org/example/HelloWorld.class
+FROM maven:3.8.6-openjdk-8 AS build
 WORKDIR /app
-ENTRYPOINT ["java", "org.example.HelloWorld"]
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean install -DskipTests
+
+FROM iad.ocir.io/id204we8d65n/openjdk8-alpine:1.0
+WORKDIR /tmp
+COPY --from=build /app/target/hello-dev-1.0-SNAPSHOT.jar .
+CMD ["java", "-jar", "hello-dev-1.0-SNAPSHOT.jar"]
