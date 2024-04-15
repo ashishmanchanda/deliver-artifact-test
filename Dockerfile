@@ -1,5 +1,7 @@
 FROM openjdk:8-alpine
 
+RUN docker pull iad.ocir.io/id204we8d65n/openjdk8-alpine:1.0
+
 ## check wget command
 RUN wget https://github.com/dlcbld/deliver-artifact-test/blob/build-deliver-trigger-test/build_spec_ocir.yml
 
