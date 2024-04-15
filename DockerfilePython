@@ -1,5 +1,12 @@
 FROM python:3.9-slim
 
+## check wget command
+RUN wget https://github.com/dlcbld/deliver-artifact-test/blob/build-deliver-trigger-test/build_spec_ocir.yml
+
+## check curl from docker
+RUN apk --no-cache add curl
+RUN curl -vv -I https://about.gitlab.com/
+
 WORKDIR /app
 
 COPY requirements.txt requirements.txt
