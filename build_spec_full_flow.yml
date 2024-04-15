@@ -42,7 +42,7 @@ steps:
       timeoutInSeconds: 600
       name: "Create Docker Artifact From OCIR"
       command: |
-        docker build -f DockerfileOCIR -t mvn-example:1.0 .
+        docker build -f DockerfileOCIR -t mvn-ocir-example:1.0 .
       onFailure:
         - type: Command
           command: |
