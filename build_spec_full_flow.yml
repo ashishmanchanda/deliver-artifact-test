@@ -51,6 +51,17 @@ steps:
         runAs: root
   - type: Command
     timeoutInSeconds: 600
+    name: "Run Basic Commands"
+    command: |
+      docker build -f DockerfileBasic -t basic-example:1.0 .
+    onFailure:
+      - type: Command
+        command: |
+          echo "Basic command Docker Image could not be created :("
+        timeoutInSeconds: 400
+        runAs: root
+  - type: Command
+    timeoutInSeconds: 600
     name: "Creating Generic Artifact"
     command: |
       echo "Hello World" > abc.txt
