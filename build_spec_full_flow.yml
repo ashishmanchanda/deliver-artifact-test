@@ -20,13 +20,33 @@ steps:
     timeoutInSeconds: 600
     name: "Create Docker Artifact"
     command: |
-      DOCKER_BUILDKIT=0 docker build -t hello-test:1.0 .
-      docker build -f DockerfilePython -t python-flask-example:1.0 .
-      DOCKER_BUILDKIT=0 docker build -f DockerfileOCIR -t mvn-ocir-example:1.0 .
+      DOCKER_BUILDKIT=0 docker build --network host -t hello-test:1.0 .
     onFailure:
       - type: Command
         command: |
           echo "Docker image could not be created :("
+        timeoutInSeconds: 400
+        runAs: root
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Create Python Flask Docker Image"
+    command: |
+      docker build -f DockerfilePython -t python-flask-example:1.0 .
+    onFailure:
+      - type: Command
+        command: |
+          echo "Python Flask Docker image could not be created :("
+        timeoutInSeconds: 400
+        runAs: root
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Create Mvn Build Docker Image"
+    command: |
+      DOCKER_BUILDKIT=0 docker build -f DockerfileOCIR -t mvn-ocir-example:1.0 .
+    onFailure:
+      - type: Command
+        command: |
+          echo "Mvn Build Docker Image could not be created :("
         timeoutInSeconds: 400
         runAs: root
   - type: Command
