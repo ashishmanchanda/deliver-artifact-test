@@ -42,7 +42,7 @@ steps:
     timeoutInSeconds: 600
     name: "Create Mvn Build Docker Image"
     command: |
-      DOCKER_BUILDKIT=0 docker build -f DockerfileOCIR -t mvn-ocir-example:1.0 .
+      docker build --network host -f DockerfileOCIR -t mvn-ocir-example:1.0 .
     onFailure:
       - type: Command
         command: |
