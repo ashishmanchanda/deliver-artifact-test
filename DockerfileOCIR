@@ -1,5 +1,5 @@
 FROM iad.ocir.io/axg3zewhl95k/do-not-delete-maven-3-8-6-openjdk8:1.0
-WORKDIR /app
+WORKDIR /tmp
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean install -DskipTests
