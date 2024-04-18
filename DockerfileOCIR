@@ -4,7 +4,7 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean install -DskipTests
 
-FROM iad.ocir.io/id204we8d65n/openjdk8-alpine:1.0
+FROM iad.ocir.io/axg3zewhl95k/do-not-delete-openjdk8-alpine:1.0
 ## check curl from docker
 RUN apk --no-cache add curl
 RUN curl -vv -I https://about.gitlab.com/
