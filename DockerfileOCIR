@@ -3,5 +3,6 @@ WORKDIR /tmp
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean install -DskipTests
+RUN ls
 COPY target/hello-dev-1.0-SNAPSHOT.jar .
 CMD ["java", "-jar", "hello-dev-1.0-SNAPSHOT.jar"]
