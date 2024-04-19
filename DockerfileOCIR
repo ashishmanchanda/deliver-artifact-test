@@ -1,13 +1,6 @@
-FROM maven:3.8.6-openjdk-8 AS build
+FROM iad.ocir.io/axg3zewhl95k/do-not-delete-maven-3-8-6-openjdk8:1.0
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 RUN mvn clean install -DskipTests
-
-FROM iad.ocir.io/axg3zewhl95k/do-not-delete-openjdk8-alpine:1.0
-## check curl from docker
-RUN apk --no-cache add curl
-RUN curl -vv -I https://about.gitlab.com/
-WORKDIR /tmp
-COPY --from=build /app/target/hello-dev-1.0-SNAPSHOT.jar .
-CMD ["java", "-jar", "hello-dev-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/hello-dev-1.0-SNAPSHOT.jar"]

@@ -29,6 +29,28 @@ steps:
         runAs: root
   - type: Command
     timeoutInSeconds: 600
+    name: "Create Python Flask Docker Image"
+    command: |
+      docker build -f DockerfilePython -t python-flask-example:1.0 .
+    onFailure:
+      - type: Command
+        command: |
+          echo "Python Flask Docker image could not be created :("
+        timeoutInSeconds: 400
+        runAs: root
+  - type: Command
+    timeoutInSeconds: 600
+    name: "Create Mvn Build Docker Image"
+    command: |
+      docker build -f DockerfileOCIR -t mvn-ocir-example:1.0 .
+    onFailure:
+      - type: Command
+        command: |
+          echo "Mvn Build Docker Image could not be created :("
+        timeoutInSeconds: 400
+        runAs: root
+  - type: Command
+    timeoutInSeconds: 600
     name: "Creating Generic Artifact"
     command: |
       echo "Hello World" > abc.txt
