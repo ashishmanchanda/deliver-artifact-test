@@ -1,4 +1,6 @@
 FROM openjdk:8-alpine
-COPY ./src/main/java/org/example/HelloWorld.class /app/org/example/HelloWorld.class
 WORKDIR /app
-ENTRYPOINT ["java", "org.example.HelloWorld"]
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean install -DskipTests
+CMD ["java", "-jar", "target/hello-dev-1.0-SNAPSHOT.jar"]
