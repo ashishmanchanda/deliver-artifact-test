@@ -28,7 +28,7 @@ steps:
         timeoutInSeconds: 400
         runAs: root
   - type: Command
-    timeoutInSeconds: 1200
+    timeoutInSeconds: 600
     name: "Create Python Flask Docker Image"
     command: |
       docker build -f DockerfilePython -t python-flask-example:1.0 .
