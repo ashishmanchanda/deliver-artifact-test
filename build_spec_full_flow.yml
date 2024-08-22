@@ -1,6 +1,6 @@
 version: 0.1
 component: build
-timeoutInSeconds: 6000
+timeoutInSeconds: 6600
 runAs: root
 shell: bash
 steps:
@@ -28,7 +28,7 @@ steps:
         timeoutInSeconds: 400
         runAs: root
   - type: Command
-    timeoutInSeconds: 600
+    timeoutInSeconds: 1200
     name: "Create Python Flask Docker Image"
     command: |
       docker build -f DockerfilePython -t python-flask-example:1.0 .
